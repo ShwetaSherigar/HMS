@@ -2,13 +2,11 @@ package com.hms.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 @Entity
 public class Reservation 
@@ -18,29 +16,47 @@ public class Reservation
 	private int reservationId;
 	private Date checkIn;
 	private Date checkOut;
-	
-
 	@JoinColumn
-	private Room roomNo;
+	private int roomNo;
 	
 	@JoinColumn(name = "customerId")
-	private Customer customerId;
+	private int customerId;
 	private float totalPrice;
+	private String selectedroomType;
+	
+//	@Embedded
+//	@AttributeOverrides({
+//		  @AttributeOverride( name = "roomNo", column = @Column(name = "roomNo"))
+//		})
+	
+	
+	
+//	@Embedded
+//	@AttributeOverrides({
+//		  @AttributeOverride( name = "customerId", column = @Column(name = "customerId"))
+//		})
+
 	
 	public Reservation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reservation(int reservationId, Date checkIn, Date checkOut, Room roomNo, Customer customerId, float totalPrice) {
-		super();
-		this.reservationId = reservationId;
-		this.checkIn = checkIn;
-		this.checkOut = checkOut;
-		this.roomNo = roomNo;
-		this.customerId = customerId;
-		this.totalPrice = totalPrice;
-	}
+	
+
+	public Reservation(int reservationId, Date checkIn, Date checkOut, int roomNo, int customerId, float totalPrice,
+		String selectedroomType) {
+	super();
+	this.reservationId = reservationId;
+	this.checkIn = checkIn;
+	this.checkOut = checkOut;
+	this.roomNo = roomNo;
+	this.customerId = customerId;
+	this.totalPrice = totalPrice;
+	this.selectedroomType = selectedroomType;
+}
+
+
 
 	public Date getCheckIn() {
 		return checkIn;
@@ -59,20 +75,20 @@ public class Reservation
 	}
 	
 	
-	public Room getRoomNo() {
+	public int getRoomNo() {
 		return roomNo;
 	}
 
-	public void setRoomNo(Room roomNo) {
+	public void setRoomNo(int roomNo) {
 		this.roomNo = roomNo;
 	}
 
 
-	public Customer getCustomerId() {
+	public int getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(Customer customerId) {
+	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
 
@@ -84,11 +100,27 @@ public class Reservation
 		this.totalPrice = totalPrice;
 	}
 
+	
+	public String getSelectedroomType() {
+		return selectedroomType;
+	}
+
+
+
+	public void setSelectedroomType(String selectedroomType) {
+		this.selectedroomType = selectedroomType;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Reservation [reservationId=" + reservationId + ", checkIn=" + checkIn + ", checkOut=" + checkOut
-				+ ", roomNo=" +", customerId="+", totalPrice=" + totalPrice + "]";
+				+ ", roomNo=" + roomNo + ", customerId=" + customerId + ", totalPrice=" + totalPrice
+				+ ", selectedroomType=" + selectedroomType + "]";
 	}
+
+
 
 
 }

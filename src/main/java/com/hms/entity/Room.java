@@ -1,14 +1,15 @@
 package com.hms.entity;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+@Embeddable
 public class Room 
 {
-	@Id
-	@GeneratedValue
+	
 	private int roomNo;
 	private String roomType;
 	private int capacity;
@@ -29,6 +30,8 @@ public class Room
 		this.price = price;
 	}
 
+	@Id
+	@GeneratedValue
 	public int getRoomNo() {
 		return roomNo;
 	}

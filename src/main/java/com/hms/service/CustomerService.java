@@ -5,4 +5,5 @@ import com.hms.entity.Customer;
 public interface CustomerService 
 {
 	public void createCustomer(Customer customer);
+	public Customer getCustomer(String emailId);
 }

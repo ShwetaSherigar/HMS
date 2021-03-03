@@ -38,8 +38,8 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.hms.entity.Customer</value>
-				<value>com.hms.entity.Reservation</value>
 				<value>com.hms.entity.Room</value>
+				<value>com.hms.entity.Reservation</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
