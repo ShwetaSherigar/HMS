@@ -1,0 +1,4 @@
+com\hms\controller\CustomerTestCase.class
+com\hms\controller\ReservationTestCase.class
+com\hms\controller\RoomTestCase.class
+com\hms\test\config\TestConfig.class
