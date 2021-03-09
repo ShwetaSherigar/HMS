@@ -1,0 +1,519 @@
+swagger: "2.0"
+info:
+  description: "This is a portal for online hotel room booking, which provides provision for the user to book room according their choice of available rooms."
+  version: "1.0.0"
+  title: "Hotel Management System"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8081"
+basePath: "/HMS"
+tags:
+- name: "Customer"
+  description: "Registering new customer"
+- name: "Reservation"
+  description: "Reservation of rooms"
+- name: "Room"
+  description: "Room details"
+ 
+schemes:
+- "http"
+
+paths:
+ 
+  /create:
+    post:
+      tags:
+      - "Customer" 
+      summary: "register a new customer"
+      description: "Register a new customer"
+      operationId: "create"
+      consumes:
+      - "application/json"
+  
+      produces:
+   
+      - "application/json"
+      
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "List of customer details"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/Customer"
+     
+      
+      responses:
+        "405":
+          description: "invalid input"
+      
+   
+  /changePassword:
+    put:
+      tags:
+      - "Customer"
+      summary: "User can change password"
+      description: ""
+      operationId: "ChangePassword"
+      produces:
+      
+      - "application/json"
+      
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "emailId and Password "
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/Customer"
+     
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Customer"
+        "400":
+          description: "Invalid status value"
+      
+  /getCustomerId/{emailId}/:
+    get:
+      tags:
+      - "Customer"
+      summary: "Retrieving Customer Id using EmailId"
+      description: ""
+      operationId: "CustomerIdByemailId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "emailId"
+        in: "path"
+        description: ""
+        required: true
+        type: "string"
+        format: "email"
+        items:
+          type: "string"
+          format: "email"
+      
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Customer"
+        "400":
+          description: "Invalid tag value"
+     
+      
+  /getCustomerById/{customerId}:
+    get:
+      tags:
+      - "Customer"
+      summary: "Fetches customer details using Customer Id"
+      description: "Returns Customer details"
+      operationId: "customerId"
+      produces:
+     
+      - "application/json"
+      parameters:
+      - name: "customerId"
+        in: "path"
+        description: ""
+        required: true
+        type: "integer"
+       
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            
+            items:
+              $ref: "#/definitions/Customer"
+        "400":
+          description: "Invalid ID supplied"
+         
+        "404":
+          description: "Pet not found"
+     
+ 
+  /reservation:
+    post:
+      tags:
+      - "Reservation" 
+      summary: "reserve a new room"
+      description: "Register a new customer"
+      operationId: "reservation"
+      consumes:
+      - "application/json"
+  
+      produces:
+   
+      - "application/json"
+      
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "List of reservation details"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/Reservation"
+     
+      
+      responses:
+        "405":
+          description: "invalid input"
+          
+  /bookingDetail/{customerId}:
+    get:
+      tags:
+      - "Reservation"
+      summary: "Fetches booking  details using Customer Id"
+      description: "Returns booking details"
+      operationId: "bookingDetails"
+      produces:
+     
+      - "application/json"
+      parameters:
+      - name: "customerId"
+        in: "path"
+        description: ""
+        required: true
+        type: "integer"
+       
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            
+            items:
+              $ref: "#/definitions/Reservation"
+        "400":
+          description: "Invalid ID supplied"
+         
+        "404":
+          description: "Reservation not found"
+          
+  /bookingDetailbyresId/{reservationId}:
+    get:
+      tags:
+      - "Reservation"
+      summary: "Fetches booking  details using reservation Id"
+      description: "Returns booking details"
+      operationId: "bookingDetailsbyreservationId"
+      produces:
+     
+      - "application/json"
+      parameters:
+      - name: "reservationId"
+        in: "path"
+        description: ""
+        required: true
+        type: "integer"
+       
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            
+            items:
+              $ref: "#/definitions/Reservation"
+        "400":
+          description: "Invalid ID supplied"
+         
+        "404":
+          description: "Reservation not found"
+  /update/{reservationId}:
+    put:
+      tags:
+      - "Reservation"
+      summary: "User can change password"
+      description: ""
+      operationId: "updateReservation"
+      produces:
+      
+      - "application/json"
+      
+      parameters:
+      - in: "path"
+        type: "integer"
+        name: "reservationId"
+        required: true
+     
+      
+        
+     
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Customer"
+        "400":
+          description: "Invalid status value"
+          
+  /bookedRoomDetail/{roomType}:
+    get:
+      tags:
+      - "Reservation"
+      summary: "Fetches booked room  details using Customer Id"
+      description: "Returns booked room details"
+      operationId: "bookedRoomDetails"
+      produces:
+     
+      - "application/json"
+      parameters:
+      - name: "roomType"
+        in: "path"
+        description: ""
+        required: true
+        type: "string"
+       
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            
+            items:
+              $ref: "#/definitions/Reservation"
+        "400":
+          description: "Invalid ID supplied"
+         
+        "404":
+          description: "Reservation not found"
+  
+  /getRoomTypes:
+    get:
+      tags:
+      - "Room"
+      summary: "Fetches booked room  details using Customer Id"
+      description: "Returns booked room details"
+      operationId: "Room"
+      produces:
+     
+      - "application/json"
+     
+       
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            
+            items:
+              $ref: "#/definitions/Room"
+        "400":
+          description: "Invalid ID supplied"
+         
+        "404":
+          description: "Reservation not found"
+  /getRoomNo/{roomType}:
+    get:
+      tags:
+      - "Room"
+      summary: "Fetches room No using room type"
+      description: "Returns room number"
+      operationId: "RoomNo"
+      produces:
+     
+      - "application/json"
+      parameters:
+      - name: "roomType"
+        in: "path"
+        description: ""
+        required: true
+        type: "string"
+       
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            
+            items:
+              $ref: "#/definitions/Room"
+        "400":
+          description: "Invalid ID supplied"
+         
+        "404":
+          description: "Reservation not found"
+          
+  /getRoomDetails:
+    get:
+      tags:
+      - "Room"
+      summary: "Fetches room Details"
+      description: "Returns room details"
+      operationId: "RoomDetails"
+      produces:
+     
+      - "application/json"
+      
+       
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            
+            items:
+              $ref: "#/definitions/Room"
+        "400":
+          description: "Invalid ID supplied"
+         
+        "404":
+          description: "Reservation not found"
+  
+  /getRoomCapacity/{roomType}:
+    get:
+      tags:
+      - "Room"
+      summary: "Fetches roomcapacity using room type"
+      description: "Returns room capacity "
+      operationId: "RoomCapacity"
+      produces:
+     
+      - "application/json"
+      parameters:
+      - name: "roomType"
+        in: "path"
+        description: ""
+        required: true
+        type: "string"
+       
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            
+            items:
+              $ref: "#/definitions/Room"
+        "400":
+          description: "Invalid ID supplied"
+         
+        "404":
+          description: "Reservation not found"
+          
+  /getRoomPrice/{roomType}:
+    get:
+      tags:
+      - "Room"
+      summary: "Fetches room price using room type"
+      description: "Returns room price"
+      operationId: "RoomPrice"
+      produces:
+     
+      - "application/json"
+      parameters:
+      - name: "roomType"
+        in: "path"
+        description: ""
+        required: true
+        type: "string"
+       
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            
+            items:
+              $ref: "#/definitions/Room"
+        "400":
+          description: "Invalid ID supplied"
+         
+        "404":
+          description: "Reservation not found"
+  
+definitions: 
+  Customer:
+    type: object
+    properties:
+      customerId:
+        type: "integer"
+        format: "int64"
+       
+      name:
+        type: "string"
+       
+      phone:                     
+        type: "string"
+       
+      gender:
+        type: "string"
+       
+      emailId:
+        type: "string"
+        format: "email"
+        pattern: '^[A-Za-z0-9]+([._+-][0-9a-zA-Z]+)?@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}([.][a-zA-Z]{2})?'
+         
+      address:
+        type: "string"
+      
+      password:
+        type: "string"
+        
+  
+  Reservation:
+    type: "object"
+    properties:
+      reservationId:
+        type: "integer"
+        format: "int64"
+      checkIn:
+        type: "string"
+        format: "date"
+      checkOut:
+        type: "string"
+        format: "date"
+      roomNo:
+        type: "integer"
+      customerId:
+        type: "integer"
+      totalPrice:
+        type: "integer"
+      selectedRoomType:
+        type: "string"
+      status:
+        type: "string"
+      
+  Room:
+    type: "object"
+    properties:
+      roomNo:
+        type: "integer"
+        format: "int64"
+      roomType:
+        type: "string"
+      capacity:
+        type: "integer"
+      status:
+        type: "string"
+      price:
+        type: "integer"
+     
+    
+  
+  
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
